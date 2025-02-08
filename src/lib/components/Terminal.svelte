@@ -1,15 +1,21 @@
 <script lang="ts">
-  let command = $state("");
+	import run from '$lib/tools/command.ts';
 
-  function execute() {
-    console.log(command);
-  }
+	let command = $state('');
 
-  function onkeydown(event: KeyboardEvent) {
-    if (event.key === "Enter") {
-      execute();
-    }
-  }
+	let history = $state([]);
+
+	function onkeydown(event: KeyboardEvent) {
+		if (event.key === 'Enter') {
+			history.push(run(command));
+			command = '';
+		}
+	}
 </script>
 
+<ul>
+	{#each history as historyPiece}
+		<li>{historyPiece}</li>
+	{/each}
+</ul>
 <input type="text" {onkeydown} bind:value={command} />
