@@ -1,3 +1,3 @@
-export default function run(input: string) {
-	return input;
+export default function run(command: string) {
+	return command;
 }
