@@ -42,9 +42,26 @@
 	}
 </script>
 
-<ul>
-	{#each history as historyPiece}
-		<li>{historyPiece}</li>
-	{/each}
-</ul>
-<input type="text" {onkeydown} bind:value={command} />
+<div class="terminal">
+	{#if history.length > 0}
+		<ul class="terminal-history">
+			{#each history as historyPiece}
+				<li>{historyPiece}</li>
+			{/each}
+		</ul>
+	{/if}
+	<input type="text" {onkeydown} bind:value={command} />
+</div>
+
+<style>
+	.terminal {
+		background-color: black;
+		width: 100%;
+		height: 100%;
+		padding: 15px;
+	}
+
+	.terminal-history {
+		color: white;
+	}
+</style>
