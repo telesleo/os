@@ -1,5 +1,6 @@
 <script lang="ts">
-	import parseCommand from '$lib/tools/parse-command';
+	import { parseCommand } from '$lib/tools/parse-command';
+	import { runCommand } from '$lib/tools/run-command';
 
 	let command = $state('');
 
@@ -9,13 +10,13 @@
 		history = [];
 	}
 
-	function runCommand() {
+	function handleCommand() {
 		const parsedCommand = parseCommand(command);
 
 		if (parsedCommand._.length && parsedCommand._[0] === 'clear') {
 			clear();
 		} else {
-			history.push(JSON.stringify(parsedCommand));
+			history.push(runCommand(parsedCommand));
 		}
 
 		command = '';
@@ -23,7 +24,7 @@
 
 	function onkeydown(event: KeyboardEvent) {
 		if (event.key === 'Enter') {
-			runCommand();
+			handleCommand();
 		}
 	}
 </script>
