@@ -1,18 +1,19 @@
+import type CommandArgs from '$lib/base/command-args';
 import listFilesDirectories from './commands/list-files-directories';
 
 const commandList = [listFilesDirectories];
 
-const commands: { [key: string]: (args: { _: string[] }) => string } = {};
+const commands: { [key: string]: (args: CommandArgs, path: string) => string } = {};
 
 commandList.forEach((command) => {
 	commands[command.key] = command.run;
 });
 
-export function runCommand(args: { _: string[] }): string {
+export function runCommand(args: CommandArgs, path: string): string {
 	const command = args._[0];
 
 	if (command && Object.keys(commands).includes(command)) {
-		return commands[command](args);
+		return commands[command](args, path);
 	}
 
 	return '';

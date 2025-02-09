@@ -1,3 +1,5 @@
+import type CommandArgs from './command-args';
+
 export abstract class Command {
 	key: string;
 
@@ -5,5 +7,5 @@ export abstract class Command {
 		this.key = key;
 	}
 
-	abstract run(args: { _: string[] }): void;
+	abstract run(args: CommandArgs, path: string): string;
 }

@@ -6,17 +6,30 @@
 
 	let history = $state<string[]>([]);
 
+	let path = $state('/');
+
 	function clear() {
 		history = [];
+	}
+
+	function showPath() {
+		history.push(path);
 	}
 
 	function handleCommand() {
 		const parsedCommand = parseCommand(command);
 
-		if (parsedCommand._.length && parsedCommand._[0] === 'clear') {
-			clear();
-		} else {
-			history.push(runCommand(parsedCommand));
+		if (parsedCommand._.length > 0) {
+			switch (parsedCommand._[0]) {
+				case 'clear':
+					clear();
+					break;
+				case 'path':
+					showPath();
+					break;
+				default:
+					history.push(runCommand(parsedCommand, path));
+			}
 		}
 
 		command = '';
