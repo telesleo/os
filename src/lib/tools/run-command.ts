@@ -1,7 +1,8 @@
 import type CommandArgs from '$lib/base/command-args';
-import listFilesDirectories from './commands/list-files-directories';
+import listFilesDirectoriesCommand from './commands/list-files-directories';
+import createDirectoryCommand from './commands/create-directory';
 
-const commandList = [listFilesDirectories];
+const commandList = [listFilesDirectoriesCommand, createDirectoryCommand];
 
 const commands: { [key: string]: (args: CommandArgs, path: string) => string } = {};
 

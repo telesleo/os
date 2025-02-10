@@ -1,4 +1,5 @@
 import storage from '$lib/data/storage.svelte';
+import pathBrowserify from 'path-browserify';
 
 export function getDirectory(path: string) {
 	let currentDirectory: { [key: string]: any } = storage.main;
@@ -14,4 +15,11 @@ export function getDirectory(path: string) {
 	}
 
 	return currentDirectory;
+}
+
+export function createDirectory(path: string) {
+	const parentDirectoryName = pathBrowserify.dirname(path);
+	const newDirectoryName = pathBrowserify.basename(path);
+	const directory = getDirectory(parentDirectoryName);
+	directory[newDirectoryName] = {};
 }
