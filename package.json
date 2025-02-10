@@ -35,6 +35,8 @@
 		"vite": "^6.0.0"
 	},
 	"dependencies": {
+		"@types/path-browserify": "^1.0.3",
+		"path-browserify": "^1.0.1",
 		"shell-quote": "^1.8.2"
 	}
 }

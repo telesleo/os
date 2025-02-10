@@ -1,6 +1,7 @@
 import { Command } from '$lib/base/command';
 import type CommandArgs from '$lib/base/command-args';
 import { getDirectory } from '../storage-handler';
+import pathBrowserify from 'path-browserify';
 
 class ListFilesDirectoriesCommand extends Command {
 	constructor() {
@@ -8,7 +9,7 @@ class ListFilesDirectoriesCommand extends Command {
 	}
 
 	run(args: CommandArgs, path: string) {
-		const dirPath = args._[1] ? args._[1] : path;
+		const dirPath = pathBrowserify.resolve(path, args._[1] || '.');
 
 		const directory = getDirectory(dirPath);
 
