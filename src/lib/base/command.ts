@@ -7,5 +7,5 @@ export abstract class Command {
 		this.key = key;
 	}
 
-	abstract run(args: CommandArgs, path: string): string;
+	abstract run(args: CommandArgs, path: string, setPath: () => void): string;
 }

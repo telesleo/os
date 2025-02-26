@@ -23,3 +23,19 @@ export function createDirectory(path: string) {
 	const directory = getDirectory(parentDirectoryName);
 	directory[newDirectoryName] = {};
 }
+
+export function isPathValid(path: string) {
+	let currentDirectory: { [key: string]: any } = storage.main;
+
+	const pathPieces: string[] = path.split('/').filter(Boolean);
+
+	for (let index = 0; index < pathPieces.length; index++) {
+		const pathPiece = pathPieces[index];
+		if (!currentDirectory[pathPiece]) {
+			return false;
+		}
+		currentDirectory = currentDirectory[pathPiece];
+	}
+
+	return true;
+}

@@ -12,6 +12,10 @@
 		history = [];
 	}
 
+	function setPath(newPath: string) {
+		path = newPath;
+	}
+
 	function showPath() {
 		history.push(path);
 	}
@@ -28,7 +32,7 @@
 					showPath();
 					break;
 				default:
-					history.push(runCommand(parsedCommand, path));
+					history.push(runCommand(parsedCommand, path, setPath));
 			}
 		}
 
