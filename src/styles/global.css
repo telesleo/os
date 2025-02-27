@@ -1,3 +1,13 @@
+:root {
+	--black: black;
+	--white: white;
+}
+
+html,
+body {
+	height: 100%;
+}
+
 body {
 	margin: 0;
 	padding: 0;
