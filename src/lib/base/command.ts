@@ -1,11 +1,18 @@
-import type CommandArgs from './command-args';
+import type { ParsedArgs } from "minimist";
+import type { SetPath } from "./terminal";
 
-export abstract class Command {
-	key: string;
+export interface CommandOptions {
+  clear: boolean;
+}
 
-	constructor(key: string) {
-		this.key = key;
-	}
+export type CommandExecute = (
+  args: ParsedArgs,
+  options: CommandOptions,
+  path: string,
+  setPath: SetPath
+) => string;
 
-	abstract run(args: CommandArgs, path: string, setPath: () => void): string;
+export interface Command {
+  key: string;
+  execute: CommandExecute;
 }
