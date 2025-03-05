@@ -1,5 +1,5 @@
 import type { Command } from "../../base/command";
-import { invalidDirectory, invalidPath } from "../command-messages";
+import { invalidDirectory } from "../command-messages";
 import { getPath, isDirectoryValid } from "../storage";
 
 const goCommand = {
@@ -8,11 +8,11 @@ const goCommand = {
     const directoryPathRelative = args._[1] || "";
     const directoryPath = getPath(path, directoryPathRelative);
 
-    // if (!isDirectoryValid(directoryPath)) {
-    //   return invalidDirectory(directoryPath);
-    // }
+    if (!isDirectoryValid(directoryPath)) {
+      return invalidDirectory(directoryPath);
+    }
 
-    // setPath(directoryPath);
+    setPath(directoryPath);
   },
 } as Command;
 
