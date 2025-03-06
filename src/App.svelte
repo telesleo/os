@@ -1,7 +1,7 @@
 <script lang="ts">
   import "./variables.css";
 
-  import Terminal from "./components/Terminal.svelte";
+  import Boxes from "./components/Boxes.svelte";
 </script>
 
-<main><Terminal></Terminal></main>
+<main><Boxes></Boxes></main>
