@@ -5,6 +5,6 @@
 
 <div id="boxes">
   {#each boxes as box}
-    <Box application={box.application}></Box>
+    <Box {...box}></Box>
   {/each}
 </div>

@@ -1,6 +1,10 @@
 const boxes = $state([
   {
     application: "terminal",
+    x: 30,
+    y: 30,
+    width: 400,
+    height: 400,
   },
 ]);
 

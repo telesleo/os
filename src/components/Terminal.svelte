@@ -47,8 +47,8 @@
 <style>
   .terminal {
     box-sizing: border-box;
-    min-width: 100%;
     min-height: 100%;
+    min-width: 100%;
     width: fit-content;
     height: fit-content;
     background-color: var(--black);
@@ -63,6 +63,7 @@
   }
 
   .input {
+    width: 100%;
     padding: 0;
     outline: none;
     border: none;
