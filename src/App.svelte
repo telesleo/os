@@ -7,6 +7,11 @@
 
   const mouseButton: boolean[] = $state([false, false, false]);
   const mousePosition: Coordinate = $state({ x: -1, y: -1 });
+  let cursorType: string = $state("default");
+
+  function setCursorType(newCursorType: string) {
+    cursorType = newCursorType;
+  }
 
   function mouseMove(event: MouseEvent) {
     mousePosition.x = event.clientX;
@@ -34,4 +39,6 @@
   });
 </script>
 
-<main id="main"><Boxes {mouseButton} {mousePosition}></Boxes></main>
+<main id="main" style={`cursor: ${cursorType}`}>
+  <Boxes {mouseButton} {mousePosition} {setCursorType}></Boxes>
+</main>
