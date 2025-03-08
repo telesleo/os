@@ -199,7 +199,13 @@
       role="button"
       tabindex="0"
       onmousedown={headerMouseDown}
-    ></div>
+    >
+      <div class="header-info"></div>
+      <div class="header-buttons">
+        <button class="header-button-hide">_</button>
+        <button class="header-button-quit">x</button>
+      </div>
+    </div>
     <div class="content">
       <Program></Program>
     </div>
@@ -221,10 +227,29 @@
   }
 
   .header {
-    height: 30px;
     flex-shrink: 0;
     background-color: var(--white);
     border-bottom: 1px solid var(--black);
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+  }
+
+  .header-buttons {
+    display: flex;
+    flex-direction: row;
+    gap: 5px;
+  }
+
+  .header button {
+    padding: 0;
+    border: 0;
+    width: 20px;
+    height: 20px;
+    background-color: var(--lightgray);
+    font-weight: 500;
   }
 
   .content {
