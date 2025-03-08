@@ -24,7 +24,7 @@
     }
   }
 
-  function onkeydown(event: KeyboardEvent) {
+  function inputKeyDown(event: KeyboardEvent) {
     if (event.key === "Enter") {
       handleInput();
     }
@@ -41,7 +41,12 @@
       {/each}
     </ul>
   {/if}
-  <input class="input" type="text" bind:value={currentInput} {onkeydown} />
+  <input
+    class="input"
+    type="text"
+    bind:value={currentInput}
+    onkeydown={inputKeyDown}
+  />
 </div>
 
 <style>

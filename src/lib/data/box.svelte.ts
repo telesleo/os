@@ -1,4 +1,6 @@
-const boxes = $state([
+import type BoxI from "../base/box";
+
+const boxes: BoxI[] = $state([
   {
     application: "terminal",
     x: 30,
