@@ -3,12 +3,13 @@
   import Terminal from "./Terminal.svelte";
   import type { Coordinate } from "../lib/base/general";
   import { BOX_MIN_SIZE, BOX_RESIZE_AREA_SIZE } from "../lib/constants/box";
+  import { capitalize } from "../lib/tools/text";
 
   const {
     mouseButton,
     mousePosition,
-    application,
     id,
+    application,
     x,
     y,
     width,
@@ -201,7 +202,7 @@
       tabindex="0"
       onmousedown={headerMouseDown}
     >
-      <div class="header-info"></div>
+      <div class="header-info">{capitalize(application)}</div>
       <div class="header-buttons">
         <button
           class="header-button-hide"
@@ -249,6 +250,12 @@
     justify-content: space-between;
     align-items: center;
     padding: 5px;
+    overflow: hidden;
+    gap: 5px;
+  }
+
+  .header-info {
+    padding-left: 5px;
   }
 
   .header-buttons {
