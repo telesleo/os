@@ -14,7 +14,3 @@ body {
 * {
   font-family: monospace;
 }
-
-#app {
-  background-color: var(--gray);
-}

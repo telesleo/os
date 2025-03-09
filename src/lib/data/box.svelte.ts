@@ -4,7 +4,7 @@ const boxes: BoxI[] = $state([
   {
     id: 0,
     application: "terminal",
-    x: 30,
+    x: 80,
     y: 30,
     width: 400,
     height: 400,
