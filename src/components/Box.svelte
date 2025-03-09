@@ -8,6 +8,7 @@
     mouseButton,
     mousePosition,
     application,
+    id,
     x,
     y,
     width,
@@ -17,6 +18,8 @@
     setWidth,
     setHeight,
     setCursorType,
+    setHidden,
+    quitBox,
   } = $props();
   let dragging: boolean = $state(false);
   const dragOffset: Coordinate = $state({
@@ -39,8 +42,6 @@
   let resizing: boolean = $state(false);
   let resizeDirection: number = $state(0);
   const resizeRef: Coordinate = $state({ x: -1, y: -1 });
-
-  $inspect(resizeDirection);
 
   const applications: { [key: string]: Component } = {
     terminal: Terminal,
@@ -202,8 +203,18 @@
     >
       <div class="header-info"></div>
       <div class="header-buttons">
-        <button class="header-button-hide">_</button>
-        <button class="header-button-quit">x</button>
+        <button
+          class="header-button-hide"
+          onclick={() => {
+            setHidden(true);
+          }}>_</button
+        >
+        <button
+          class="header-button-quit"
+          onclick={() => {
+            quitBox(id);
+          }}>x</button
+        >
       </div>
     </div>
     <div class="content">
@@ -224,6 +235,9 @@
     outline: 1px solid var(--black);
     display: flex;
     flex-direction: column;
+    user-select: none;
+    -webkit-user-drag: none;
+    pointer-events: auto;
   }
 
   .header {

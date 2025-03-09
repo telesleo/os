@@ -21,19 +21,34 @@
   function setHeight(box: BoxI, value: number) {
     box.height = Math.max(value, BOX_MIN_SIZE);
   }
+
+  function quitBox(boxId: number) {
+    const boxIndex = boxes.findIndex((box: BoxI) => box.id === boxId);
+    delete boxes[boxIndex];
+  }
+
+  function setHidden(box: BoxI, value: boolean) {
+    console.log("setHidden: ", value);
+
+    box.hidden = value;
+  }
 </script>
 
 <div id="boxes">
   {#each boxes as box}
-    <Box
-      {mouseButton}
-      {mousePosition}
-      {...box}
-      setX={(value: number) => setX(box, value)}
-      setY={(value: number) => setY(box, value)}
-      setWidth={(value: number) => setWidth(box, value)}
-      setHeight={(value: number) => setHeight(box, value)}
-      {setCursorType}
-    ></Box>
+    {#if !box.hidden}
+      <Box
+        {mouseButton}
+        {mousePosition}
+        {...box}
+        setX={(value: number) => setX(box, value)}
+        setY={(value: number) => setY(box, value)}
+        setWidth={(value: number) => setWidth(box, value)}
+        setHeight={(value: number) => setHeight(box, value)}
+        setHidden={(value: boolean) => setHidden(box, value)}
+        {quitBox}
+        {setCursorType}
+      ></Box>
+    {/if}
   {/each}
 </div>
