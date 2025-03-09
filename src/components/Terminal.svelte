@@ -1,9 +1,16 @@
 <script lang="ts">
+  import { onMount } from "svelte";
   import executeCommand from "../lib/tools/execute-command";
 
   let path: string = $state("/");
   let currentInput: string = $state("");
   let history: { input: boolean; data: string }[] = $state([]);
+
+  let inputRef: HTMLElement;
+
+  function onClick() {
+    inputRef.focus();
+  }
 
   function clear() {
     history = [];
@@ -29,9 +36,21 @@
       handleInput();
     }
   }
+
+  onMount(() => {
+    inputRef.focus();
+  });
 </script>
 
-<div class="terminal">
+<div
+  class="terminal"
+  role="button"
+  tabindex="0"
+  onclick={onClick}
+  onkeydown={(event) => {
+    if (event.key === "Enter") onClick();
+  }}
+>
   {#if history.length > 0}
     <ul class="history-list">
       {#each history as historyPiece}
@@ -46,6 +65,7 @@
     type="text"
     bind:value={currentInput}
     onkeydown={inputKeyDown}
+    bind:this={inputRef}
   />
 </div>
 
