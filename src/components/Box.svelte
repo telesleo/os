@@ -206,12 +206,18 @@
       <div class="header-buttons">
         <button
           class="header-button-hide"
+          onmousedown={(event) => {
+            event.stopPropagation();
+          }}
           onclick={() => {
             setHidden(true);
           }}>_</button
         >
         <button
           class="header-button-quit"
+          onmousedown={(event) => {
+            event.stopPropagation();
+          }}
           onclick={() => {
             quitBox(id);
           }}>x</button
@@ -266,10 +272,9 @@
 
   .header button {
     padding: 0;
-    border: 0;
     width: 20px;
     height: 20px;
-    background-color: var(--lightgray);
+    border: 1px solid var(--lightgray);
     font-weight: 500;
   }
 
