@@ -1,12 +1,17 @@
 <script lang="ts">
+  import type BoxI from "../lib/base/box";
   import boxes from "../lib/data/box.svelte";
   import time from "../lib/data/time.svelte";
+
+  function toggleBoxHidden(box: BoxI) {
+    box.hidden = !box.hidden;
+  }
 </script>
 
 <div id="bar">
   <div>
     {#each boxes.value as box}
-      <div class="box"></div>
+      <button class="box" onclick={() => toggleBoxHidden(box)}>{" "}</button>
     {/each}
   </div>
   <div>
@@ -39,6 +44,7 @@
   .box {
     width: 40px;
     height: 40px;
+    border: 0;
     background-color: black;
   }
 </style>
