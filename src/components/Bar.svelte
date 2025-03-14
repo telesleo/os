@@ -5,7 +5,7 @@
 
 <div id="bar">
   <div>
-    {#each boxes as box}
+    {#each boxes.value as box}
       <div class="box"></div>
     {/each}
   </div>

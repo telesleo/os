@@ -20,7 +20,7 @@ export function getPath(path: string, relativePath: string) {
 export function getDirectory(path: string) {
   const pathPieces = path.split("/").filter(Boolean);
 
-  let currentDirectory: Directory = storage;
+  let currentDirectory: Directory = storage.value;
 
   for (
     let pathPieceIndex = 0;

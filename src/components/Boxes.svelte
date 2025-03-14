@@ -23,8 +23,8 @@
   }
 
   function quitBox(boxId: number) {
-    const boxIndex = boxes.findIndex((box: BoxI) => box.id === boxId);
-    delete boxes[boxIndex];
+    const boxIndex = boxes.value.findIndex((box: BoxI) => box.id === boxId);
+    delete boxes.value[boxIndex];
   }
 
   function setHidden(box: BoxI, value: boolean) {
@@ -35,7 +35,7 @@
 </script>
 
 <div id="boxes">
-  {#each boxes as box}
+  {#each boxes.value as box}
     {#if !box.hidden}
       <Box
         {mouseButton}

@@ -1,6 +1,6 @@
 import type { Command } from "../../base/command";
 import { getDirectory, getPath } from "../storage";
-import { invalidDirectory, invalidPath } from "../command-messages";
+import { invalidDirectory } from "../command-messages";
 
 const listCommand = {
   key: "list",
