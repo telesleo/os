@@ -28,8 +28,6 @@
   }
 
   function setHidden(box: BoxI, value: boolean) {
-    console.log("setHidden: ", value);
-
     box.hidden = value;
   }
 </script>
