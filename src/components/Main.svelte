@@ -3,7 +3,6 @@
   import type { Coordinate } from "../lib/base/general";
   import Bar from "./Bar.svelte";
   import Boxes from "./Boxes.svelte";
-  import { routing } from "../lib/tools/routing.svelte";
 
   const mouseButton: boolean[] = $state([false, false, false]);
   const mousePosition: Coordinate = $state({ x: -1, y: -1 });
@@ -37,8 +36,6 @@
       window.removeEventListener("mouseup", mouseUp);
     };
   });
-
-  $inspect(routing);
 </script>
 
 <div id="screen"></div>
