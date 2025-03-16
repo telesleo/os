@@ -1,23 +1,28 @@
 import minimist from "minimist";
 import shellQuote from "shell-quote";
-import clearCommand from "./commands/clear";
 import type { Command, CommandExecute, CommandOptions } from "../base/command";
 import {
   directoryExists,
   invalidCommand,
   invalidDirectory,
+  invalidDirectoryOrFile,
   invalidPath,
 } from "./command-messages";
-import pathCommand from "./commands/path";
-import goCommand from "./commands/go";
+
 import type { SetPath } from "../base/terminal";
-import dirCommand from "./commands/dir";
-import listCommand from "./commands/list";
+
 import {
   DirectoryAlreadyExists,
   DirectoryNotFound,
+  DirectoryOrFileNotFound,
   InvalidPath,
 } from "../errors/storage";
+import clearCommand from "./commands/clear";
+import pathCommand from "./commands/path";
+import goCommand from "./commands/go";
+import listCommand from "./commands/list";
+import dirCommand from "./commands/dir";
+import delCommand from "./commands/delete";
 
 const commandList: Command[] = [
   clearCommand,
@@ -25,6 +30,7 @@ const commandList: Command[] = [
   goCommand,
   listCommand,
   dirCommand,
+  delCommand,
 ];
 
 const commands: Record<string, CommandExecute> = commandList.reduce(
@@ -32,13 +38,13 @@ const commands: Record<string, CommandExecute> = commandList.reduce(
     commandMap[command.key] = command.execute;
     return commandMap;
   },
-  {} as Record<string, CommandExecute>
+  {} as Record<string, CommandExecute>,
 );
 
 export default function executeCommand(
   input: string,
   path: string,
-  setPath: SetPath
+  setPath: SetPath,
 ): {
   message: string;
   options: CommandOptions;
@@ -61,6 +67,8 @@ export default function executeCommand(
   } catch (error) {
     if (error instanceof InvalidPath) {
       message = invalidPath((error as InvalidPath).path);
+    } else if (error instanceof DirectoryOrFileNotFound) {
+      message = invalidDirectoryOrFile((error as DirectoryNotFound).path);
     } else if (error instanceof DirectoryNotFound) {
       message = invalidDirectory((error as DirectoryNotFound).path);
     } else if (error instanceof DirectoryAlreadyExists) {

@@ -13,3 +13,7 @@ export function directoryExists(directoryPath: string) {
 export function invalidPath(path: string) {
   return `path "${path}" is not valid`;
 }
+
+export function invalidDirectoryOrFile(directoryPath: string) {
+  return `directory or file "${directoryPath}" does not exist`;
+}

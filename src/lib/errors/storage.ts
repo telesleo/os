@@ -7,6 +7,12 @@ class PathError extends Error {
   }
 }
 
+export class DirectoryOrFileNotFound extends PathError {
+  constructor(path: string) {
+    super(`Directory or file "${path}" not found`, path);
+  }
+}
+
 export class DirectoryNotFound extends PathError {
   constructor(path: string) {
     super(`Directory "${path}" not found`, path);

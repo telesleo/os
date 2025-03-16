@@ -4,6 +4,7 @@ import pathBrowserify from "path-browserify";
 import {
   DirectoryAlreadyExists,
   DirectoryNotFound,
+  DirectoryOrFileNotFound,
   InvalidPath,
 } from "../errors/storage";
 
@@ -58,4 +59,21 @@ export function createDirectory(path: string) {
   }
 
   parentDirectory[directoryName] = {};
+}
+
+export function deleteDirectoryOrFile(path: string) {
+  const parentDirectoryPath = pathBrowserify.dirname(path);
+  const directoryFileName = pathBrowserify.basename(path);
+
+  const parentDirectory = getDirectory(parentDirectoryPath);
+
+  if (!parentDirectory) {
+    throw new DirectoryNotFound(parentDirectoryPath);
+  }
+
+  if (!(directoryFileName in parentDirectory)) {
+    throw new DirectoryOrFileNotFound(path);
+  }
+
+  delete parentDirectory[directoryFileName];
 }
