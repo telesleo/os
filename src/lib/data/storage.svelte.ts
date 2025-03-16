@@ -1,10 +1,5 @@
-const storage: { [key: string]: {} } = $state({
-  value: {
-    "main-folder": {
-      folder1: {},
-      folder2: {},
-    },
-  },
+const storage: { [key: string]: {} | null } = $state({
+  value: null,
 });
 
 export default storage;

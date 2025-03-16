@@ -4,6 +4,8 @@
   import Main from "./components/Main.svelte";
   import { onMount } from "svelte";
   import type { Coordinate } from "./lib/base/general";
+  import storage from "./lib/data/storage.svelte";
+  import { DEFAULT_STORAGE } from "./lib/constants/storage";
 
   const mouseButton: boolean[] = $state([false, false, false]);
   const mousePosition: Coordinate = $state({ x: -1, y: -1 });
@@ -26,10 +28,34 @@
     mouseButton[event.button] = false;
   }
 
+  function saveStorage() {
+    if (storage.value === null) {
+      return;
+    }
+
+    localStorage.setItem("storage", JSON.stringify(storage.value));
+  }
+
+  function loadStorage() {
+    const storageData = localStorage.getItem("storage");
+    if (storageData) {
+      const storageDataParsed = JSON.parse(storageData);
+      storage.value = storageDataParsed;
+    } else {
+      storage.value = DEFAULT_STORAGE;
+    }
+  }
+
+  $effect(() => {
+    saveStorage();
+  });
+
   onMount(() => {
     window.addEventListener("mousemove", mouseMove);
     window.addEventListener("mousedown", mouseDown);
     window.addEventListener("mouseup", mouseUp);
+
+    loadStorage();
 
     return () => {
       window.removeEventListener("mousemove", mouseMove);
